@@ -1,0 +1,28 @@
+{
+  "name": "lemon-market",
+  "version": "1.0.0",
+  "description": "A scalable and reliable order placement API for stock exchange integration.",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:concurdev/lemon-market.git"
+  },
+  "author": "Ashish Vashisht",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}

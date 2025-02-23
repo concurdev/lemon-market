@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD:
+        root # actual root password | not best practice but for this pilot project this would help
+        #      automate otherwise running mysql in container is also not best practice it limit availability
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  lemon-market:
+    image: lemon-market_service_img
+    container_name: lemon-market_service_container
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
